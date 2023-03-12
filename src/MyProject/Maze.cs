@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Tubes2_duaAjaCukup{
+namespace uburubur{
 class Maze
 {
     private readonly char[,] _maze;
     private readonly int _size;
+    private int starti;
+    private int startj;
+    private int treasure;
 
     public Maze(int size)
     {
@@ -55,6 +58,58 @@ class Maze
     }
 }
 
+public void findStart()
+{
+    for (int i = 0; i < _size; i++)
+    {
+        for (int j = 0; j < _size; j++)
+        {
+            if (_maze[i, j] == 'K')
+            {
+                starti = i;
+                startj = j;
+            }
+        }
+    }
+
+
+}
+public int getStarti()
+{
+    return starti;
+}
+
+public int getStartj()
+{
+    return startj;
+}
+
+public Maze getMaze()
+{
+    return this;
+}
+
+public char getContent(int i, int j)
+{
+    return _maze[i, j];
+}
+
+public void findTreasure(){
+    for (int i = 0; i < _size; i++)
+    {
+        for (int j = 0; j < _size; j++)
+        {
+            if (_maze[i, j] == 'T')
+            {
+                treasure++;
+            }
+        }
+    }
+}
+
+public int getTreasure(){
+    return treasure;
+}
 
 }
 }
