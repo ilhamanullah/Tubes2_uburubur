@@ -1,0 +1,15 @@
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/bin/Debug/net7.0/MyProject
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/bin/Debug/net7.0/MyProject.deps.json
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/bin/Debug/net7.0/MyProject.runtimeconfig.json
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/bin/Debug/net7.0/MyProject.dll
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/bin/Debug/net7.0/MyProject.pdb
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/MyProject.csproj.AssemblyReference.cache
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/MyProject.GeneratedMSBuildEditorConfig.editorconfig
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/MyProject.AssemblyInfoInputs.cache
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/MyProject.AssemblyInfo.cs
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/MyProject.csproj.CoreCompileInputs.cache
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/MyProject.dll
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/refint/MyProject.dll
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/MyProject.pdb
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/MyProject.genruntimeconfig.cache
+/home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/ref/MyProject.dll

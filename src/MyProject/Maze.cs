@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-public class Maze
+namespace Tubes2_duaAjaCukup{
+class Maze
 {
     private readonly char[,] _maze;
     private readonly int _size;
@@ -22,7 +23,7 @@ public class Maze
 
     public void createMaze(string input)
     {
-        string text = File.ReadAllText("../doc/" + input +".txt");
+        string text = File.ReadAllText("../../doc/" + input +".txt");
 
         string[] rows = text.Split('\n');
         
@@ -54,14 +55,6 @@ public class Maze
     }
 }
 
-[STAThread]
-static void Main(string[] args)
-{
-    Maze maze = new Maze(4);
-    Console.Write("Masukkan nama file: ");
-    string input = Console.ReadLine();
-    Console.WriteLine();
-    maze.createMaze(input);
-    maze.PrintMaze();
+
 }
 }
