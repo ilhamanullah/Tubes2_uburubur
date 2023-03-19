@@ -5,8 +5,8 @@ using System.IO;
 namespace uburubur{
 class Maze
 {
-    private readonly char[,] _maze;
-    private readonly int _size;
+    private char[,] _maze;
+    private int _size;
     private int starti;
     private int startj;
     private int treasure;
@@ -24,22 +24,22 @@ class Maze
         }
     }
 
-    public void createMaze(string input)
+    public void createMaze(string fileName)
+{
+    string path = $"../../doc/{fileName}.txt";
+    string[] rows = File.ReadAllLines(path);
+    int numRows = rows.Length;
+    int numCols = rows[0].Length;
+    _maze = new char[numRows, numCols];
+
+    for (int i = 0; i < numRows; i++)
     {
-        string text = File.ReadAllText("../../doc/" + input +".txt");
-
-        string[] rows = text.Split('\n');
-        
-
-        for (int i = 0; i < rows.Length; i++)
+        for (int j = 0; j < numCols; j++)
         {
-            for (int j = 0; j < rows[0].Length; j++)
-            {
-                _maze[i, j] = rows[i][j];
-            }
+            _maze[i, j] = rows[i][j];
         }
-
-        }
+    }
+}
     
 
     public void PrintMaze()

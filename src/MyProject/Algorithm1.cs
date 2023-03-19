@@ -2,57 +2,51 @@ using System;
 
 namespace uburubur{
     class BFS {
-        private Queue<Tuple<char, int, int, char>> queue;
+        private Queue<Tuple<Node, char>> queue;
         private int treasureFound;
-        private List<Tuple<char, int, int, char>> visited = new List<Tuple<char, int, int, char>>();
-        private Tuple<char, int, int, char> treasureFoundTuple;
-        private List<Tuple<char, int, int, char>> path = new List<Tuple<char, int, int, char>>();
+        private List<Tuple<Node, char>> visited = new List<Tuple<Node, char>>();
+        private Tuple<Node, char> treasureFoundTuple;
+        private List<Tuple<Node, char>> path = new List<Tuple<Node, char>>();
         public BFS(){
-            queue = new Queue<Tuple<char, int, int, char>>();
+            queue = new Queue<Tuple<Node, char>>();
             treasureFound = 0;
 
         }
 
-        public void inqueue (Maze maze, int starti, int startj){
+        public void inqueue (Node node){
             // Console.WriteLine("Starti: " + starti);
             // Console.WriteLine("Startj: " + startj);
             // Console.WriteLine(maze.getContent(1,3));
-            if (startj + 1 < 4){
-                if (maze.getContent(starti, startj + 1) == 'R' || maze.getContent(starti, startj + 1) == 'T'){
-                    var tuple = new Tuple<char, int, int, char>(maze.getContent(starti, startj + 1), starti, startj + 1, 'R');
+            if (node.getRight() != null){
+                    var tuple = new Tuple<Node, char>(node.getRight(), 'R');
                     queue.Enqueue(tuple);
-                    Console.WriteLine("a");
-                }
+                    // Console.WriteLine("a");
             }
-            if (startj - 1 >= 0){
-                if (maze.getContent(starti, startj - 1) == 'R' || maze.getContent(starti, startj - 1) == 'T'){
-                    var tuple = new Tuple<char, int, int, char>(maze.getContent(starti, startj - 1), starti, startj - 1, 'L');
+            if (node.getLeft() != null){
+                    var tuple = new Tuple<Node, char>(node.getLeft(), 'L');
                     queue.Enqueue(tuple);
-                    Console.WriteLine("b");
-                }
+                    // Console.WriteLine("b");
             }
-            if (starti + 1 < 4){
-                if (maze.getContent(starti + 1, startj) == 'R' || maze.getContent(starti + 1, startj) == 'T'){
-                    var tuple = new Tuple<char, int, int, char>(maze.getContent(starti + 1, startj), starti + 1, startj, 'D');
+            if (node.getUp() != null){
+                    var tuple = new Tuple<Node, char>(node.getUp(), 'U');
                     queue.Enqueue(tuple);
-                    Console.WriteLine("b");
-                }
+                    // Console.WriteLine("c");
             }
-            if (starti - 1 >= 0){
-                if (maze.getContent(starti - 1, startj) == 'R' || maze.getContent(starti - 1, startj) == 'T'){
-                    var tuple = new Tuple<char, int, int, char>(maze.getContent(starti - 1, startj), starti - 1, startj, 'U');
+            if (node.getDown() != null){
+                    var tuple = new Tuple<Node, char>(node.getDown(), 'D');
                     queue.Enqueue(tuple);
-                }
+                    // Console.WriteLine("d");
             }
             
         }
-        public void search (Maze maze){
-            int starti = maze.getStarti();
-            int startj = maze.getStartj();
-            visited.Add(new Tuple<char, int, int, char>(maze.getContent(starti, startj), starti, startj, 'S'));
+        public void search (MazeGraph maze){
+            int starti = maze.getStart().getX();
+            int startj = maze.getStart().getY();
+            maze.setPosition(maze.getStart());
+            visited.Add(new Tuple<Node, char>(maze.getStart(), 'S'));
             Console.WriteLine("Starti: " + starti);
             Console.WriteLine("Startj: " + startj);
-            inqueue(maze, starti, startj);
+            inqueue(maze.getPosition());
             for (int i = 0; i < 10; i++){
                 Console.WriteLine(queue.Count());
                 var tuple = queue.Dequeue();
@@ -60,8 +54,9 @@ namespace uburubur{
                     treasureFound++;
                     treasureFoundTuple = tuple;
                 }
-                Console.WriteLine("Tuple: " + tuple.Item1 + " " + tuple.Item2 + " " + tuple.Item3);
-                inqueue(maze, tuple.Item2, tuple.Item3);
+                // Console.WriteLine("Tuple: " + tuple.Item1 + " " + tuple.Item2 + " " + tuple.Item3);
+                position = tuple.Item1;
+                inqueue(position);
                 visited.Add(tuple);
                 // queue.Dequeue();
             }
@@ -69,7 +64,7 @@ namespace uburubur{
 
 
         public void PrintQueue(){
-            Queue<Tuple<char, int, int, char>> temp = new Queue<Tuple<char, int, int, char>>();
+            Queue<Tuple<Node, char>> temp = new Queue<Tuple<Node, char>>();
             temp = queue;
             while (temp.Count() != 0){
                 var tuple = temp.Dequeue();

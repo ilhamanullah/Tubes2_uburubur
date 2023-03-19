@@ -13,3 +13,18 @@
 /home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/MyProject.pdb
 /home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/MyProject.genruntimeconfig.cache
 /home/kelvin/Documents/Stima/Tubes2_duaAjaCukup/src/MyProject/obj/Debug/net7.0/ref/MyProject.dll
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\bin\Debug\net7.0\MyProject.exe
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\bin\Debug\net7.0\MyProject.deps.json
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\bin\Debug\net7.0\MyProject.runtimeconfig.json
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\bin\Debug\net7.0\MyProject.dll
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\bin\Debug\net7.0\MyProject.pdb
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\obj\Debug\net7.0\MyProject.csproj.AssemblyReference.cache
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\obj\Debug\net7.0\MyProject.GeneratedMSBuildEditorConfig.editorconfig
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\obj\Debug\net7.0\MyProject.AssemblyInfoInputs.cache
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\obj\Debug\net7.0\MyProject.AssemblyInfo.cs
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\obj\Debug\net7.0\MyProject.csproj.CoreCompileInputs.cache
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\obj\Debug\net7.0\MyProject.dll
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\obj\Debug\net7.0\refint\MyProject.dll
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\obj\Debug\net7.0\MyProject.pdb
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\obj\Debug\net7.0\MyProject.genruntimeconfig.cache
+D:\Kelvin\code\semester 4\stigma\Tubes2_uburubur\src\MyProject\obj\Debug\net7.0\ref\MyProject.dll
