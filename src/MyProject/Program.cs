@@ -44,6 +44,15 @@ namespace MyApplication
             queue.findPath();
             Console.WriteLine("ROUTE :");
             queue.printPath();
+            Console.WriteLine();
+            DFS stack = new DFS();
+            stack.search(graph);
+            Console.WriteLine();
+            Console.WriteLine("Stack DFS: ");
+            stack.printVisited();
+            stack.findPath();
+            Console.WriteLine("ROUTE :");
+            stack.printPath();
         }   
     }
 }

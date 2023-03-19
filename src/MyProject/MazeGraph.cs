@@ -59,8 +59,11 @@ class MazeGraph{
             {
                 if (rows[i][j] != ' '){
                 maze[a,b] = rows[i][j];
-                    Console.WriteLine(a + " " + b);
-                    Console.WriteLine("i: " + i + " j: " + j);
+                    if (rows[i][j] == 'T'){
+                        treasure++;
+                    }
+                    // Console.WriteLine(a + " " + b);
+                    // Console.WriteLine("i: " + i + " j: " + j);
         // Console.WriteLine("Masuk");
                 b++;
                 }
@@ -202,6 +205,10 @@ class MazeGraph{
         position = node;
     }
 
+    public int getTreasure()
+    {
+        return treasure;
+    }
     
 }
 }
