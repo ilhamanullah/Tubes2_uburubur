@@ -26,7 +26,7 @@ class MazeGraph{
             Console.Write("Enter your file: ");
             string name;
             name = Console.ReadLine();
-        string path = $"../../doc/{name}.txt";
+        string path = $"../../test/{name}.txt";
         string[] rows = File.ReadAllLines(path);
         if (rows.Length*2-1 != rows[0].Length){
             Console.WriteLine("Invalid Size Maze");
