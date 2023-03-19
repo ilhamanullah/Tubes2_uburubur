@@ -35,7 +35,15 @@ namespace MyApplication
             graph.readfile();
             graph.findStart();
             graph.createlink();
-            graph.printNodes();
+            // graph.printNodes();
+            BFS queue = new BFS();
+            queue.search(graph);
+            Console.WriteLine();
+            Console.WriteLine("Queue BFS: ");
+            queue.printVisited();
+            queue.findPath();
+            Console.WriteLine("ROUTE :");
+            queue.printPath();
         }   
     }
 }

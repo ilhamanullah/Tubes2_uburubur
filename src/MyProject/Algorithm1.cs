@@ -17,22 +17,22 @@ namespace uburubur{
             // Console.WriteLine("Starti: " + starti);
             // Console.WriteLine("Startj: " + startj);
             // Console.WriteLine(maze.getContent(1,3));
-            if (node.getRight() != null){
+            if (node.getRight() != null && notVisited(node.getRight())){
                     var tuple = new Tuple<Node, char>(node.getRight(), 'R');
                     queue.Enqueue(tuple);
-                    // Console.WriteLine("a");
+                    Console.WriteLine("a");
             }
-            if (node.getLeft() != null){
+            if (node.getLeft() != null && notVisited(node.getLeft())){
                     var tuple = new Tuple<Node, char>(node.getLeft(), 'L');
                     queue.Enqueue(tuple);
                     // Console.WriteLine("b");
             }
-            if (node.getUp() != null){
+            if (node.getUp() != null && notVisited(node.getUp())){
                     var tuple = new Tuple<Node, char>(node.getUp(), 'U');
                     queue.Enqueue(tuple);
                     // Console.WriteLine("c");
             }
-            if (node.getDown() != null){
+            if (node.getDown() != null && notVisited(node.getDown())){
                     var tuple = new Tuple<Node, char>(node.getDown(), 'D');
                     queue.Enqueue(tuple);
                     // Console.WriteLine("d");
@@ -43,20 +43,20 @@ namespace uburubur{
             int starti = maze.getStart().getX();
             int startj = maze.getStart().getY();
             maze.setPosition(maze.getStart());
-            visited.Add(new Tuple<Node, char>(maze.getStart(), 'S'));
             Console.WriteLine("Starti: " + starti);
             Console.WriteLine("Startj: " + startj);
             inqueue(maze.getPosition());
-            for (int i = 0; i < 10; i++){
-                Console.WriteLine(queue.Count());
+            visited.Add(new Tuple<Node, char>(maze.getStart(), 'S'));
+            for (int i = 0; i < 9; i++){
+                // Console.WriteLine(queue.Count());
                 var tuple = queue.Dequeue();
-                if (tuple.Item1 == 'T'){
+                if (tuple.Item1.getValue() == 'T'){
                     treasureFound++;
                     treasureFoundTuple = tuple;
                 }
                 // Console.WriteLine("Tuple: " + tuple.Item1 + " " + tuple.Item2 + " " + tuple.Item3);
-                position = tuple.Item1;
-                inqueue(position);
+                maze.setPosition(tuple.Item1);
+                inqueue(maze.getPosition());
                 visited.Add(tuple);
                 // queue.Dequeue();
             }
@@ -68,7 +68,7 @@ namespace uburubur{
             temp = queue;
             while (temp.Count() != 0){
                 var tuple = temp.Dequeue();
-                Console.Write(tuple.Item1 + " ");
+                Console.Write(tuple.Item1.getValue() + " " + tuple.Item1.getX() + " " + tuple.Item1.getY() + " " + tuple.Item2 + " ");
             }
             Console.WriteLine();
         }
@@ -76,9 +76,69 @@ namespace uburubur{
         public void printVisited(){
             Console.WriteLine(visited.Count());
             foreach (var tuple in visited){
-                Console.WriteLine("Tuple: " + tuple.Item1 + " " + tuple.Item2 + " " + tuple.Item3 + " " + tuple.Item4);
+                Console.Write(tuple.Item1.getValue() + " " + tuple.Item1.getX() + " " + tuple.Item1.getY() + " " + tuple.Item2 + " ");
             Console.WriteLine();
         }
+        }
+        
+        public void findPath(){
+            int i = treasureFoundTuple.Item1.getX();
+            int j = treasureFoundTuple.Item1.getY();
+            visited.Reverse();
+            bool found = false;
+            char direction = ' ';
+            // Console.WriteLine("Path: ");
+            while (!found){
+                // Console.Write(direction + " ");
+                for(int k = 0; k < visited.Count(); k++){
+                    if (visited[k].Item1.getX() == i && visited[k].Item1.getY() == j){
+                        path.Add(visited[k]);
+                // Console.WriteLine("KONTOL");
+                        if (visited[k].Item1.getValue() == 'K'){
+                            found = true;
+                            break;
+                        }
+                        direction = visited[k].Item2;
+                // Console.WriteLine("i: " + i);
+                // Console.WriteLine("j: " + j);
+                //         Console.WriteLine("Direction: " + direction);
+                        switch (direction){
+                            case 'U':
+                                i++;
+                                break;
+                            case 'D':
+                                i--;
+                                break;
+                            case 'L':
+                                j++;
+                                break;
+                            case 'R':
+                                j--;
+                                break;
+                        }
+                    }
+                }
+                }
+            path.Reverse();
+            }
+
+        public bool notVisited(Node node)
+        {
+            foreach (var tuple in visited)
+            {
+                if (tuple.Item1.getX() == node.getX() && tuple.Item1.getY() == node.getY())
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void printPath()
+        {
+            foreach (var tuple in path){
+                Console.WriteLine("Tuple: " + tuple.Item1.getValue() + " " + tuple.Item1.getX() + " " + tuple.Item1.getY() + " " + tuple.Item2);
+            }
         }
     }
 
