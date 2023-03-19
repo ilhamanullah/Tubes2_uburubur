@@ -20,7 +20,7 @@ namespace uburubur{
             if (node.getRight() != null && notVisited(node.getRight())){
                     var tuple = new Tuple<Node, char>(node.getRight(), 'R');
                     queue.Enqueue(tuple);
-                    Console.WriteLine("a");
+                    // Console.WriteLine("a");
             }
             if (node.getLeft() != null && notVisited(node.getLeft())){
                     var tuple = new Tuple<Node, char>(node.getLeft(), 'L');
@@ -54,7 +54,8 @@ namespace uburubur{
                     treasureFound++;
                     treasureFoundTuple = tuple;
                 }
-                // Console.WriteLine("Tuple: " + tuple.Item1 + " " + tuple.Item2 + " " + tuple.Item3);
+                Console.WriteLine("Tuple: " +tuple.Item1.getValue() + " " + tuple.Item1.getX() + " " + tuple.Item1.getY() + " " + tuple.Item2 + " ");
+                Console.WriteLine("Node Left: " + tuple.Item1.getLeft() + " Right: " + tuple.Item1.getRight() + " Up: " + tuple.Item1.getUp() + " Down: " + tuple.Item1.getDown());
                 maze.setPosition(tuple.Item1);
                 inqueue(maze.getPosition());
                 visited.Add(tuple);
@@ -148,6 +149,7 @@ namespace uburubur{
         private List<Tuple<Node, char>> visited = new List<Tuple<Node, char>>();
         private Tuple<Node, char> treasureFoundTuple;
         private List<Tuple<Node, char>> path = new List<Tuple<Node, char>>();
+        private int step;
         public DFS(){
             stack = new Stack<Tuple<Node, char>>();
             treasureFound = 0;
@@ -195,7 +197,7 @@ namespace uburubur{
                     treasureFound++;
                     treasureFoundTuple = tuple;
                 }
-                // Console.WriteLine("Tuple: " + tuple.Item1 + " " + tuple.Item2 + " " + tuple.Item3);
+                Console.Write(tuple.Item1.getValue() + " " + tuple.Item1.getX() + " " + tuple.Item1.getY() + " " + tuple.Item2 + " ");
                 maze.setPosition(tuple.Item1);
                 inqueue(maze.getPosition());
                 visited.Add(tuple);
@@ -233,6 +235,7 @@ namespace uburubur{
                 for(int k = 0; k < visited.Count(); k++){
                     if (visited[k].Item1.getX() == i && visited[k].Item1.getY() == j){
                         path.Add(visited[k]);
+                        step++;
                 // Console.WriteLine("KONTOL");
                         if (visited[k].Item1.getValue() == 'K'){
                             found = true;
@@ -277,6 +280,10 @@ namespace uburubur{
                 }
             }
             return true;
+        }
+
+        public int getStep(){
+            return step;
         }
 
     }
