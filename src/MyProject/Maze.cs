@@ -26,7 +26,7 @@ class Maze
 
     public void createMaze(string fileName)
 {
-    string path = $"../../doc/{fileName}.txt";
+    string path = $"../../test/{fileName}.txt";
     string[] rows = File.ReadAllLines(path);
     int numRows = rows.Length;
     int numCols = rows[0].Length;
