@@ -14,40 +14,86 @@ namespace uburubur{
         }
 
         public void inqueue (Node node){
-            // Console.WriteLine("Starti: " + starti);
-            // Console.WriteLine("Startj: " + startj);
-            // Console.WriteLine(maze.getContent(1,3));
-            if (node.getRight() != null && notVisited(node.getRight())){
-                    var tuple = new Tuple<Node, char>(node.getRight(), 'R');
-                    queue.Enqueue(tuple);
-                    Console.WriteLine("a");
+            
+            
+            Console.WriteLine("node skrg x : " + node.getX() + "  y : " + node.getY());
+            // if(node.getY() != 0 && notVisited(node.getLeft())){
+            //     Console.WriteLine("kiri belom dibaca");
+            // }
+            // if(node.getY() != 3 && notVisited(node.getRight())){
+            //     Console.WriteLine("kanan belom dibaca");
+            // }
+            // if(node.getX() != 0 && notVisited(node.getUp())){
+            //     Console.WriteLine("atas belom dibaca");
+            // }
+            // if(node.getX() != 3 && notVisited(node.getDown())){
+            //     Console.WriteLine("Bawah belom dibaca");
+            // }
+            if(node.getLeft() == null){
+                Console.WriteLine("gaada node kiri");
             }
+            if(node.getRight() == null){
+                Console.WriteLine("gaada node kanan");
+            }
+            if(node.getUp() == null){
+                Console.WriteLine("gaada node atas");
+            }
+            if(node.getDown() == null){
+                Console.WriteLine("gaada node bawah");
+            }
+
+            Console.WriteLine("visited node");
+            foreach (var tuple in visited){
+                Console.Write("(" + tuple.Item1.getX() + "," + tuple.Item1.getY() + "), ");
+            }
+            Console.WriteLine("\n");
+
+
             if (node.getLeft() != null && notVisited(node.getLeft())){
                     var tuple = new Tuple<Node, char>(node.getLeft(), 'L');
                     queue.Enqueue(tuple);
-                    // Console.WriteLine("b");
+                    Console.WriteLine("L");
+            }
+
+
+
+            // Console.WriteLine("node kanan " + "(" + node.getRight().getX() + "," + node.getRight().getY() + ")");
+
+
+            if (node.getRight() != null && notVisited(node.getRight())){
+                    var tuple = new Tuple<Node, char>(node.getRight(), 'R');
+                    queue.Enqueue(tuple);
+                    Console.WriteLine("R");
             }
             if (node.getUp() != null && notVisited(node.getUp())){
                     var tuple = new Tuple<Node, char>(node.getUp(), 'U');
                     queue.Enqueue(tuple);
-                    // Console.WriteLine("c");
+                    Console.WriteLine("U");
             }
             if (node.getDown() != null && notVisited(node.getDown())){
                     var tuple = new Tuple<Node, char>(node.getDown(), 'D');
                     queue.Enqueue(tuple);
-                    // Console.WriteLine("d");
+                    Console.WriteLine("D");
             }
-            
         }
+
         public void search (MazeGraph maze){
+            // maze.printNodes();
             int starti = maze.getStart().getX();
             int startj = maze.getStart().getY();
             maze.setPosition(maze.getStart());
             Console.WriteLine("Starti: " + starti);
             Console.WriteLine("Startj: " + startj);
+
+            // Console.WriteLine(maze.getPosition().getX());
+            // Console.WriteLine(maze.getPosition().getY());
+            
             inqueue(maze.getPosition());
             visited.Add(new Tuple<Node, char>(maze.getStart(), 'S'));
+            // Console.WriteLine("fdsfdfdfdfdfd");
+
             while (treasureFound < maze.getTreasure()){
+                Console.WriteLine("===");
                 // Console.WriteLine(queue.Count());
                 var tuple = queue.Dequeue();
                 if (tuple.Item1.getValue() == 'T'){
@@ -55,7 +101,8 @@ namespace uburubur{
                     treasureFoundTuple = tuple;
                 }
                 // Console.WriteLine("Tuple: " + tuple.Item1 + " " + tuple.Item2 + " " + tuple.Item3);
-                maze.setPosition(tuple.Item1);
+                Node temp = maze.FindNode(tuple.Item1.getX(), tuple.Item1.getY());
+                maze.setPosition(temp);
                 inqueue(maze.getPosition());
                 visited.Add(tuple);
                 // queue.Dequeue();
@@ -188,7 +235,9 @@ namespace uburubur{
             Console.WriteLine("Startj: " + startj);
             inqueue(maze.getPosition());
             visited.Add(new Tuple<Node, char>(maze.getStart(), 'S'));
+            // Console.WriteLine("total treasure : " + maze.getTreasure());
             while (treasureFound < maze.getTreasure()){
+
                 // Console.WriteLine(queue.Count());
                 var tuple = stack.Pop();
                 if (tuple.Item1.getValue() == 'T'){

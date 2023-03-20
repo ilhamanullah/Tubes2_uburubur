@@ -28,14 +28,16 @@ namespace MyApplication
             // stack.printVisited();
             // stack.findPath();
             // stack.printPath();
-            MazeGraph graph = new MazeGraph(4);
+            MazeGraph graph = new MazeGraph();
             // Console.Write("Enter your file: ");
             // string name;
             // name = Console.ReadLine();
             graph.readfile();
             graph.findStart();
             graph.createlink();
-            // graph.printNodes();
+            Console.WriteLine("--------");
+            graph.printNodes();
+            Console.WriteLine("--------");
             BFS queue = new BFS();
             queue.search(graph);
             Console.WriteLine();
@@ -45,14 +47,14 @@ namespace MyApplication
             Console.WriteLine("ROUTE :");
             queue.printPath();
             Console.WriteLine();
-            DFS stack = new DFS();
-            stack.search(graph);
-            Console.WriteLine();
-            Console.WriteLine("Stack DFS: ");
-            stack.printVisited();
-            stack.findPath();
-            Console.WriteLine("ROUTE :");
-            stack.printPath();
+            // DFS stack = new DFS();
+            // stack.search(graph);
+            // Console.WriteLine();
+            // Console.WriteLine("Stack DFS: ");
+            // stack.printVisited();
+            // stack.findPath();
+            // Console.WriteLine("ROUTE :");
+            // stack.printPath();
         }   
     }
 }

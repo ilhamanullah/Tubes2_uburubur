@@ -12,10 +12,10 @@ class MazeGraph{
     private Node start;
     private Node position;
 
-    public MazeGraph(int x){
-        this.width = x;
-        this.height = x;
-        this.maze = new char[x,x];
+    public MazeGraph(){
+        // this.width = x;
+        // this.height = x;
+        // this.maze = new char[x,x];
         this.treasure = 0;
         this.nodes = new List<Node>();
     }
@@ -55,11 +55,13 @@ class MazeGraph{
                 }
             }
         }
-        
-        height = rows.Length;
-        width = rows[0].Length - height + 1;
-        Console.WriteLine(height);
-        Console.WriteLine(width);
+        this.height = rows.Length;
+        this.width = rows[0].Length - height + 1;
+        this.maze = new char [this.height, this.width];
+        // height = rows.Length;
+        // width = rows[0].Length - height + 1;
+        Console.WriteLine(this.height);
+        Console.WriteLine(this.width);
         int a = 0;
         for (int i = 0; i < rows.Length; i++)
         {
@@ -71,9 +73,6 @@ class MazeGraph{
                     if (rows[i][j] == 'T'){
                         treasure++;
                     }
-                    // Console.WriteLine(a + " " + b);
-                    // Console.WriteLine("i: " + i + " j: " + j);
-        // Console.WriteLine("Masuk");
                 b++;
                 }
             }
@@ -101,26 +100,14 @@ class MazeGraph{
         int x = position.getX();
         int y = position.getY();
         Node temp = position;
-        if (x > 0)
-        {
-            if (maze[x-1,y] != 'X')
-            {
-                position.setUp(new Node(x-1,y,maze[x-1,y]));
-                
-            }
-        }
-        if (x < height-1)
-        {
-            if (maze[x+1,y] != 'X')
-            {
-                position.setDown(new Node(x+1,y,maze[x+1,y]));
-                
-            }
-        }
+
+        Console.WriteLine("x : " + x + " y : " + y);
+
         if (y > 0)
         {
             if (maze[x,y-1] != 'X')
             {
+                Console.WriteLine("createleft");
                 position.setLeft(new Node(x,y-1,maze[x,y-1]));
                 
             }
@@ -129,31 +116,27 @@ class MazeGraph{
         {
             if (maze[x,y+1] != 'X')
             {
+                Console.WriteLine("createright");
                 position.setRight(new Node(x,y+1,maze[x,y+1]));
                 
             }
         }
-        if (position.getUp() != null)
+        if (x > 0)
         {
-            if (notinNodes(position.getUp()))
+            if (maze[x-1,y] != 'X')
             {
-                nodes.Add(position.getUp());
-                position = position.getUp();
-                createlink();
-                position = temp;
+                Console.WriteLine("createup");
+                position.setUp(new Node(x-1,y,maze[x-1,y]));
+                
             }
-            
         }
-        
-        if (position.getDown() != null)
+        if (x < height-1)
         {
-            if (notinNodes(position.getDown()))
+            if (maze[x+1,y] != 'X')
             {
-                Console.WriteLine("Left");
-                nodes.Add(position.getDown());
-                position = position.getDown();
-                createlink();
-                position = temp;
+                Console.WriteLine("createbot");
+                position.setDown(new Node(x+1,y,maze[x+1,y]));
+                
             }
         }
         if (position.getLeft() != null)
@@ -173,6 +156,29 @@ class MazeGraph{
                 nodes.Add(position.getRight());
                 // Console.WriteLine("Right");
                 position = position.getRight();
+                createlink();
+                position = temp;
+            }
+        }
+        if (position.getUp() != null)
+        {
+            if (notinNodes(position.getUp()))
+            {
+                nodes.Add(position.getUp());
+                position = position.getUp();
+                createlink();
+                position = temp;
+            }
+            
+        }
+        
+        if (position.getDown() != null)
+        {
+            if (notinNodes(position.getDown()))
+            {
+                // Console.WriteLine("Left");
+                nodes.Add(position.getDown());
+                position = position.getDown();
                 createlink();
                 position = temp;
             }
@@ -218,6 +224,20 @@ class MazeGraph{
     {
         return treasure;
     }
-    
+    public List<Node> getNodes()
+    {
+        return nodes;
+    }
+    public Node FindNode(int x, int y)
+    {
+        foreach (Node n in nodes)
+        {
+            if (n.getX() == x && n.getY() == y)
+            {
+                return n;
+            }
+        }
+        return null;
+    }
 }
 }
