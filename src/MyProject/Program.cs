@@ -42,8 +42,8 @@ namespace MyApplication
             queue.search(graph);
             Console.WriteLine();
             Console.WriteLine("Queue BFS: ");
-            queue.printVisited();
-            queue.findPath();
+            // queue.printVisited();
+            queue.findPath(graph.getTreasure() - 1);
             Console.WriteLine("ROUTE :");
             queue.printPath();
             Console.WriteLine();
