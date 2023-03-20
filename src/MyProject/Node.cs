@@ -17,6 +17,10 @@ namespace uburubur
             this.x = x;
             this.y = y;
             this.value = value;
+            this.left = null;
+            this.up = null;
+            this.right = null;
+            this.down = null;
         }
 
         public int getX()
@@ -78,6 +82,18 @@ namespace uburubur
         {
             Console.WriteLine("Node: " + x + " " + y + " " + value);
         }
+
+        public void setNode(Node node)
+        {
+            this.x = node.getX();
+            this.y = node.getY();
+            this.value = node.getValue();
+            this.left = node.getLeft();
+            this.up = node.getUp();
+            this.right = node.getRight();
+            this.down = node.getDown();
+        }
+
     }
     
 }

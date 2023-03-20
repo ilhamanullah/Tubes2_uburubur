@@ -35,6 +35,7 @@ namespace MyApplication
             graph.readfile();
             graph.findStart();
             graph.createlink();
+            // Console.WriteLine("NODE :"+graph.getStart().getRight().getDown().getValue());
             // graph.printNodes();
             BFS queue = new BFS();
             queue.search(graph);

@@ -196,6 +196,10 @@ class MazeGraph{
         foreach (Node n in nodes)
         {
             Console.WriteLine(n.getX() + " " + n.getY() + " " + n.getValue() + " Left: " + n.getLeft() + " Right: " + n.getRight() + " Up: " + n.getUp() + " Down: " + n.getDown());
+            // if (n.getX()  == 1 && n.getY() == 2)
+            // {
+            //     position = n;
+            // }
         }
     }
 
@@ -217,6 +221,23 @@ class MazeGraph{
     public int getTreasure()
     {
         return treasure;
+    }
+
+    public List<Node> getNodes()
+    {
+        return nodes;
+    }
+
+    public Node FindNode(int x, int y)
+    {
+        foreach (Node n in nodes)
+        {
+            if (n.getX() == x && n.getY() == y)
+            {
+                return n;
+            }
+        }
+        return null;
     }
     
 }

@@ -56,7 +56,8 @@ namespace uburubur{
                 }
                 Console.WriteLine("Tuple: " +tuple.Item1.getValue() + " " + tuple.Item1.getX() + " " + tuple.Item1.getY() + " " + tuple.Item2 + " ");
                 Console.WriteLine("Node Left: " + tuple.Item1.getLeft() + " Right: " + tuple.Item1.getRight() + " Up: " + tuple.Item1.getUp() + " Down: " + tuple.Item1.getDown());
-                maze.setPosition(tuple.Item1);
+                Node temp = maze.FindNode(tuple.Item1.getX(), tuple.Item1.getY());
+                maze.setPosition(temp);
                 inqueue(maze.getPosition());
                 visited.Add(tuple);
                 // queue.Dequeue();
