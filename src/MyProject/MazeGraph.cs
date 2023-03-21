@@ -56,7 +56,10 @@ class MazeGraph{
             }
         }
         this.height = rows.Length;
-        this.width = rows[0].Length - height + 1;
+        // double panjang = Math.Floor(rows[0].Length/2) + 1;
+        this.width = rows[0].Length/2 + 1;
+        // Console.WriteLine("rows.length :" + rows.Length +", rows[0].length :" + rows[0].Length);
+        // Console.WriteLine("width : " + this.width);
         this.maze = new char [this.height, this.width];
         // height = rows.Length;
         // width = rows[0].Length - height + 1;
