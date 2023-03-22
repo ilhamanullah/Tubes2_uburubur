@@ -93,5 +93,6 @@ namespace uburubur
             this.right = node.getRight();
             this.down = node.getDown();
         }
+
     }
 }

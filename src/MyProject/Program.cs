@@ -35,27 +35,35 @@ namespace MyApplication
             graph.readfile();
             graph.findStart();
             graph.createlink();
-            // Console.WriteLine("--------");
+            Console.WriteLine("--------");
             // graph.printNodes();
             // Console.WriteLine("--------");
-            BFS queue = new BFS();
-            queue.search(graph);
-            Console.WriteLine();
-            Console.WriteLine("Queue BFS: ");
+            // BFS queue = new BFS();
+            // queue.search(graph);
+            // Console.WriteLine();
+            // Console.WriteLine("Queue BFS: ");
             // queue.printVisited();
-            queue.findPath(graph.getTreasure() - 1);
-            Console.WriteLine("ROUTE :");
-            queue.printPath();
-            Console.WriteLine();
-
             DFS stack = new DFS();
-            stack.search(graph);
+            stack.DFSsearch(graph);
             Console.WriteLine();
             Console.WriteLine("Stack DFS: ");
-            // stack.printVisited();
-            stack.findPath(graph.getTreasure() - 1);
-            Console.WriteLine("ROUTE :");
+            stack.reversePath();
             stack.printPath();
+            stack.makeSteps();
+            stack.printSteps();
+            // queue.findPath(graph.getTreasure() - 1);
+            // Console.WriteLine("ROUTE :");
+            // queue.printPath();
+            // Console.WriteLine();
+
+            // DFS stack = new DFS();
+            // stack.search(graph);
+            // Console.WriteLine();
+            // Console.WriteLine("Stack DFS: ");
+            // // stack.printVisited();
+            // stack.findPath(graph.getTreasure() - 1);
+            // Console.WriteLine("ROUTE :");
+            // stack.printPath();
             // stack.printPath();
         }   
     }

@@ -22,39 +22,43 @@ class MazeGraph{
 
     public void readfile()
     {
-        bool valid = true;
+        string[] rows = null;
+        bool valid = false;
+        while (!valid){
+
             Console.Write("Enter your file: ");
             string name;
             name = Console.ReadLine();
         string path = $"../../test/{name}.txt";
-        string[] rows = File.ReadAllLines(path);
+        rows = File.ReadAllLines(path);
 
         for (int i = 0 ; i < rows.Length; i++){
                     for (int j = 0; j < rows[0].Length; j++){
-                        if (rows[i][j] != 'K' || rows[i][j] != 'X' || rows[i][j] != 'T' || rows[i][j] != ' ' || rows[i][j] != 'R'){
+                        if (rows[i][j] == 'K'){
+                            valid = true;
+                        }
+                        else if(rows[i][j] == 'R'){
+                            valid = true;
+                        }
+                        else if(rows[i][j] == 'T'){
+                            valid = true;
+                        }
+                        else if(rows[i][j] == ' '){
+                            valid = true;
+                        }
+                        else if(rows[i][j] == 'X'){
+                            valid = true;
+                        }
+                        else{
                             valid = false;
+                            break;
+                            Console.WriteLine("Invalid File");
                         }
                     }
                 }
-
-        if (rows.Length*2-1 != rows[0].Length && !valid){
-            Console.WriteLine("Invalid Size Maze");
-            while (rows.Length*2-1 != rows[0].Length && valid == false)
-            {
-                Console.Write("Enter your file: ");
-                name = Console.ReadLine();
-                path = $"../../test/{name}.txt";
-                rows = File.ReadAllLines(path);
-                valid = true;
-                for (int i = 0 ; i < rows.Length; i++){
-                    for (int j = 0; j < rows[0].Length; j++){
-                        if (rows[i][j] != 'K' || rows[i][j] != 'X' || rows[i][j] != 'T' || rows[i][j] != ' ' || rows[i][j] != 'R'){
-                            valid = false;
-                        }
-                    }
-                }
-            }
         }
+
+
         this.height = rows.Length;
         // double panjang = Math.Floor(rows[0].Length/2) + 1;
         this.width = rows[0].Length/2 + 1;
