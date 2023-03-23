@@ -16,5 +16,16 @@ namespace UburUbur
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // The user selected a file, you can do something with it here
+                string fileName = openFileDialog.FileName;
+                // Do something with the fileName here
+            }
+        }
     }
 }

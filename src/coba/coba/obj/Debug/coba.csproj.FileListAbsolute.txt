@@ -1,0 +1,11 @@
+D:\Kelvin\code\semester 4\stigma\coba\coba\bin\Debug\coba.exe.config
+D:\Kelvin\code\semester 4\stigma\coba\coba\bin\Debug\coba.exe
+D:\Kelvin\code\semester 4\stigma\coba\coba\bin\Debug\coba.pdb
+D:\Kelvin\code\semester 4\stigma\coba\coba\obj\Debug\coba.csproj.AssemblyReference.cache
+D:\Kelvin\code\semester 4\stigma\coba\coba\obj\Debug\coba.csproj.SuggestedBindingRedirects.cache
+D:\Kelvin\code\semester 4\stigma\coba\coba\obj\Debug\coba.Form1.resources
+D:\Kelvin\code\semester 4\stigma\coba\coba\obj\Debug\coba.Properties.Resources.resources
+D:\Kelvin\code\semester 4\stigma\coba\coba\obj\Debug\coba.csproj.GenerateResource.cache
+D:\Kelvin\code\semester 4\stigma\coba\coba\obj\Debug\coba.csproj.CoreCompileInputs.cache
+D:\Kelvin\code\semester 4\stigma\coba\coba\obj\Debug\coba.exe
+D:\Kelvin\code\semester 4\stigma\coba\coba\obj\Debug\coba.pdb

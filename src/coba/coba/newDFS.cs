@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 
-namespace uburubur{
+namespace coba{
     class DFS{
         private Stack<Node> stack;
         private Stack<Node> path;
@@ -19,7 +21,7 @@ namespace uburubur{
             stack.Push(graph.getStart());
             visited.Add(graph.getStart());
             // path.Push(graph.getStart());
-            while (stack.Count() != 0){
+            while (stack.Count != 0){
                 Console.WriteLine("---------------------");
                 Node node = stack.Pop();
                 path.Push(node);
@@ -32,8 +34,13 @@ namespace uburubur{
                     Console.WriteLine("All treasure found!");
                     break;
                 }
-                
-                if (!exploreable(path.Peek())){
+                if (path.Peek().getValue() != 'T' && !exploreable(path.Peek())){
+                    Console.WriteLine("Dead Enddddd");
+                    while (!exploreable(path.Peek())){
+                        path.Pop();
+                    }
+                }
+                else if (path.Peek().getValue() == 'T' && !exploreable(path.Peek())){
                     List<Node> temp = new List<Node>();
                     Console.WriteLine("Dead End");
                     bool found = false;
@@ -45,10 +52,10 @@ namespace uburubur{
                             found = true;
                         }
                     }
-                    for (int i = temp.Count() - 1; i >= 0; i--){
+                    for (int i = temp.Count - 1; i >= 0; i--){
                         path.Push(temp[i]);
                     }
-                    for (int i = 1; i < temp.Count(); i++){
+                    for (int i = 1; i < temp.Count; i++){
                         path.Push(temp[i]);
                     }
                 }
@@ -118,7 +125,7 @@ namespace uburubur{
 
         public void reversePath(){
             Stack<Node> temp = new Stack<Node>();
-            while (path.Count() != 0){
+            while (path.Count != 0){
                 temp.Push(path.Pop());
             }
             path = temp;
@@ -128,7 +135,7 @@ namespace uburubur{
             Stack<Node> temp = new Stack<Node>();
             temp = path;
             Node prev = temp.Pop();
-            while (temp.Count() != 0){
+            while (temp.Count != 0){
                 Node curr = temp.Pop();
                 if (curr.getX() == prev.getX() && curr.getY() == prev.getY() - 1){
                     steps.Add('U');
