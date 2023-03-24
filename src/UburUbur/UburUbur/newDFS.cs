@@ -130,18 +130,23 @@ namespace uburubur{
             Stack<Node> temp = new Stack<Node>();
             temp = path;
             Node prev = temp.Pop();
-            while (temp.Count != 0){
+            while (temp.Count != 0)
+            {
                 Node curr = temp.Pop();
-                if (curr.getX() == prev.getX() && curr.getY() == prev.getY() - 1){
+                if (curr.getX() == prev.getX() - 1 && curr.getY() == prev.getY())
+                {
                     steps.Add('U');
                 }
-                else if (curr.getX() == prev.getX() && curr.getY() == prev.getY() + 1){
+                else if (curr.getX() == prev.getX() + 1 && curr.getY() == prev.getY())
+                {
                     steps.Add('D');
                 }
-                else if (curr.getX() == prev.getX() - 1 && curr.getY() == prev.getY()){
+                else if (curr.getX() == prev.getX() && curr.getY() == prev.getY() - 1)
+                {
                     steps.Add('L');
                 }
-                else if (curr.getX() == prev.getX() + 1 && curr.getY() == prev.getY()){
+                else if (curr.getX() == prev.getX() && curr.getY() == prev.getY() + 1)
+                {
                     steps.Add('R');
                 }
                 prev = curr;
@@ -157,6 +162,12 @@ namespace uburubur{
         {
             return path.ToList();
         }
+
+        public List<char> getSteps() {
+            return steps;
+        }
+
+        
 
     }
 }

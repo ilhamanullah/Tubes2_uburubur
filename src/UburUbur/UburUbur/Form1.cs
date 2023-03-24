@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using uburubur;
 
 namespace UburUbur
@@ -17,6 +19,9 @@ namespace UburUbur
         private static bool checkBFS;
         private static bool checkDFS;
         private MazeGraph graph;
+        private int speed;
+        private List<char> steps;
+        private long exetime;
         public Form1()
         {
             InitializeComponent();
@@ -123,16 +128,42 @@ namespace UburUbur
 
         private async void button2_Click(object sender, EventArgs e)
         {
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.Black;
+                }
+            }
+            dataGridView1.Rows[graph.getStart().getX()].Cells[graph.getStart().getY()].Style.BackColor = Color.Red;
+            List<Node> nodes = new List<Node>();
+            nodes = graph.getNodes();
+            foreach (var node in nodes)
+            {
+                if (node.getValue() == 'T')
+                {
+                    dataGridView1.Rows[node.getX()].Cells[node.getY()].Style.BackColor = Color.Blue;
+                }
+                if (node.getValue() == 'R')
+                {
+                    dataGridView1.Rows[node.getX()].Cells[node.getY()].Style.BackColor = Color.White;
+                }
+
+            }
             if (checkDFS)
             {
+                Stopwatch sw = Stopwatch.StartNew();
                 DFS route = new DFS();
                 route.DFSsearch(graph);
+                sw.Stop();
+                exetime = sw.ElapsedMilliseconds;
                 route.reversePath();
-                List<Node> path = new List<Node>();
-                path = route.getPath();
+                List<Node> path = route.getPath();
+                route.makeSteps();
+                steps =route.getSteps();
                 foreach (Node node in path)
                 {
-                    await Task.Delay(500);
+                    await Task.Delay(speed);
                     if (dataGridView1.Rows[node.getX()].Cells[node.getY()].Style.BackColor == Color.LightGreen)
                     {
                         dataGridView1.Rows[node.getX()].Cells[node.getY()].Style.BackColor = Color.Green;
@@ -143,10 +174,37 @@ namespace UburUbur
 
                     }
                 }
+                foreach (var Char in steps)
+                {
+                    
+                        label3.Text += Char + " - ";
+                    
+                }
+                label6.Text = Convert.ToString(exetime + " ms");
+
+
             }
             if (checkBFS)
             {
                 BFS route = new BFS();
+                route.search(graph);
+                List <Tuple<Node, char>> visited = new List<Tuple<Node, char>>();
+                visited = route.getVisited();
+                int i = 0;
+                for (int j = 0; i < visited.Count; j++)
+                {
+                    if (dataGridView1.Rows[visited[j].Item1.getX()].Cells[visited[j].Item1.getY()].Style.BackColor == Color.Yellow)
+                    {
+                    await Task.Delay(speed);
+                    dataGridView1.Rows[visited[j].Item1.getX()].Cells[visited[j].Item1.getY()].Style.BackColor = Color.LightBlue;
+                    if (i > 0)
+                    {
+                        dataGridView1.Rows[visited[j-1].Item1.getX()].Cells[visited[j-1].Item1.getY()].Style.BackColor = Color.Yellow;
+                    }
+                    i++;
+                    }
+                    
+                }
                 route.findPath(graph.getTreasure() - 1);
                 route.makePath();
                 route.savePath();
@@ -154,11 +212,51 @@ namespace UburUbur
                 foreach (var Tuple in path)
                 {
                     await Task.Delay(500);
-                    dataGridView1.Rows[Tuple.Item1.getX()].Cells[Tuple.Item1.getY()].Style.BackColor = Color.LightGreen;
+                    if (dataGridView1.Rows[Tuple.Item1.getX()].Cells[Tuple.Item1.getY()].Style.BackColor == Color.LightGreen)
+                    {
+                        dataGridView1.Rows[Tuple.Item1.getX()].Cells[Tuple.Item1.getY()].Style.BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[Tuple.Item1.getX()].Cells[Tuple.Item1.getY()].Style.BackColor = Color.LightGreen;
+                    }
                 }
             }
+        }
 
+        private void label3_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Length > 0)
+            {
+            int temp = Convert.ToInt32(textBox1.Text);
+            if (temp >= 0 && temp <= 1000)
+            {
+                speed = temp;
+                trackBar1.Value = speed/100;
+            }
+            else
+            {
+                speed = 500;
+                trackBar1.Value = 5;
+                textBox1.Text = "500";
+            }
+
+            }
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            textBox1.Text = Convert.ToString(trackBar1.Value*100);
+        }
+
+        private void label3_Click_1(object sender, EventArgs e)
+        {
+            
         }
     }
 }

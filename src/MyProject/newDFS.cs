@@ -156,5 +156,11 @@ namespace uburubur{
             return path.ToList();
         }
 
+        public void printVisited(){
+            foreach (Node n in visited){
+                Console.WriteLine(n.getValue() + " " + n.getX() + " " + n.getY());
+            }
+        }
+
     }
 }

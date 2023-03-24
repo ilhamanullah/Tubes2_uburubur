@@ -51,7 +51,7 @@ class MazeGraph{
                         else{
                             valid = false;
                             break;
-                            Console.WriteLine("Invalid File");
+                            
                         }
                     }
                 }
