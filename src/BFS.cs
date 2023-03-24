@@ -402,8 +402,6 @@ namespace uburubur
                         Console.WriteLine("cek");
                         for (int j = 1; j < tempListPath[i].Count; j++)
                         {
-                            // Console.WriteLine("templistPath x :" + tempListPath[i][j].Item1.getX());
-                            // Console.WriteLine("templistPath y :" + tempListPath[i][j].Item1.getY());
 
                             if (tempListPath[i][j].Item1.getX() == nodeSamePath[idxnodesame].Item1.getX()
                             && tempListPath[i][j].Item1.getY() == nodeSamePath[idxnodesame].Item1.getY())
@@ -430,7 +428,6 @@ namespace uburubur
                                 }
 
                                 break;
-                                Console.WriteLine("sssdadasdas");
                             }
                             else
                             {
