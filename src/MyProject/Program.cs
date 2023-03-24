@@ -28,21 +28,32 @@ namespace MyApplication
             // stack.printVisited();
             // stack.findPath();
             // stack.printPath();
-            MazeGraph graph = new MazeGraph(10);
+            MazeGraph graph = new MazeGraph();
             // Console.Write("Enter your file: ");
             // string name;
             // name = Console.ReadLine();
             graph.readfile();
             graph.findStart();
             graph.createlink();
-            // Console.WriteLine("NODE :"+graph.getStart().getRight().getDown().getValue());
+            Console.WriteLine("--------");
             // graph.printNodes();
+            // Console.WriteLine("--------");
             BFS queue = new BFS();
             queue.search(graph);
             Console.WriteLine();
             Console.WriteLine("Queue BFS: ");
-            queue.printVisited();
-            queue.findPath();
+            // queue.printVisited();
+            // DFS stack = new DFS();
+            // stack.DFSsearch(graph);
+            // Console.WriteLine();
+            // Console.WriteLine("Stack DFS: ");
+            // stack.reversePath();
+            // stack.printPath();
+            // stack.makeSteps();
+            // stack.printSteps();
+            queue.findPath(graph.getTreasure() - 1);
+            queue.makePath();
+            queue.savePath();
             Console.WriteLine("ROUTE :");
             queue.printPath();
             // Console.WriteLine();
@@ -50,11 +61,11 @@ namespace MyApplication
             // stack.search(graph);
             // Console.WriteLine();
             // Console.WriteLine("Stack DFS: ");
-            // stack.printVisited();
-            // stack.findPath();
+            // // stack.printVisited();
+            // stack.findPath(graph.getTreasure() - 1);
             // Console.WriteLine("ROUTE :");
             // stack.printPath();
-            // Console.WriteLine(stack.getStep());
+            // stack.printPath();
         }   
     }
 }

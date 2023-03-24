@@ -9,6 +9,7 @@ class MazeGraph{
     private char[,] maze;
     private List<Node> nodes;
     private int treasure;
+    private List<Node> treasures;
     private Node start;
     private Node position;
 
@@ -20,16 +21,14 @@ class MazeGraph{
         this.nodes = new List<Node>();
     }
 
-    public void readfile()
+    public void readfile(string fileName)
     {
         string[] rows = null;
         bool valid = false;
         while (!valid){
 
-            Console.Write("Enter your file: ");
-            string name;
-            name = Console.ReadLine();
-        string path = $"../../test/{name}.txt";
+            
+        string path = $"{fileName}";
         rows = File.ReadAllLines(path);
 
         for (int i = 0 ; i < rows.Length; i++){
@@ -209,10 +208,6 @@ class MazeGraph{
         foreach (Node n in nodes)
         {
             Console.WriteLine(n.getX() + " " + n.getY() + " " + n.getValue() + " Left: " + n.getLeft() + " Right: " + n.getRight() + " Up: " + n.getUp() + " Down: " + n.getDown());
-            // if (n.getX()  == 1 && n.getY() == 2)
-            // {
-            //     position = n;
-            // }
         }
     }
 
@@ -250,5 +245,26 @@ class MazeGraph{
         }
         return null;
     }
+
+    public int getHeight()
+        {
+            return height;
+        }
+        public int getWidth()
+        {
+            return width;
+        }
+    public List<Node> getTreasures()
+        {
+            List<Node> temp = new List<Node>();
+            foreach (var node in nodes)
+            {
+                if (node.getValue() == 'T')
+                {
+                    temp.Add(node);
+                }
+            }
+            return temp;
+        }
 }
 }

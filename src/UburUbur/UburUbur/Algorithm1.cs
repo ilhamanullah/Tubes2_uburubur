@@ -1,5 +1,6 @@
 using System;
- 
+using System.Collections.Generic;
+
 namespace uburubur{
     class BFS {
         private Queue<Tuple<Node, char>> queue;
@@ -82,7 +83,7 @@ namespace uburubur{
             visited.Add(new Tuple<Node, char>(maze.getStart(), 'S'));
             // Console.WriteLine("fdsfdfdfdfdfd");
  
-            while (queue.Count() != 0){
+            while (queue.Count != 0){
                 // Console.WriteLine("===");
                 // Console.WriteLine(queue.Count());
                 var tuple = queue.Dequeue();
@@ -143,7 +144,7 @@ namespace uburubur{
             while (!found){
                 // Console.WriteLine("visited count : " + visited.Count());
                 // Console.Write(direction + " ");
-                for(int k = 0; k < visited.Count(); k++){
+                for(int k = 0; k < visited.Count; k++){
                 // Console.WriteLine("k :" + k);
                     if (visited[k].Item1.getX() == i && visited[k].Item1.getY() == j){
                         if (visited[k].Item1.getValue() == 'T') {
@@ -194,12 +195,12 @@ namespace uburubur{
             // Console.WriteLine("treasurefound : " + treasureFoundTuple.Count());
             if(idx != -1){
                 if(notAdded(treasureFoundTuple[idx].Item1)){
-                    if(idx + 1 == treasureFoundTuple.Count()){
+                    if(idx + 1 == treasureFoundTuple.Count ){
  
                         int x = treasureFoundTuple[idx].Item1.getX();
                         int y = treasureFoundTuple[idx].Item1.getY();
                         Tuple<Node, char> flagNode = new Tuple<Node, char>(new Node(0,0,'0'), '0');
-                        for(int i = 0 ; i < visited.Count(); i++){
+                        for(int i = 0 ; i < visited.Count; i++){
                             if(visited[i].Item1.getX() == x && visited[i].Item1.getY() == y){
                                 flagNode = visited[i];
                                 break;
@@ -240,7 +241,7 @@ namespace uburubur{
                         int x = treasureFoundTuple[idx].Item1.getX();
                         int y = treasureFoundTuple[idx].Item1.getY();
                         Tuple<Node, char> flagNode = new Tuple<Node, char>(new Node(0,0,'0'), '0');
-                        for(int i = 0 ; i < visited.Count(); i++){
+                        for(int i = 0 ; i < visited.Count; i++){
                             if(visited[i].Item1.getX() == x && visited[i].Item1.getY() == y){
                                 flagNode = visited[i];
                                 break;
@@ -285,7 +286,7 @@ namespace uburubur{
                         int x = treasureFoundTuple[idx].Item1.getX();
                         int y = treasureFoundTuple[idx].Item1.getY();
                         Tuple<Node, char> flagNode = new Tuple<Node, char>(new Node(0,0,'0'), '0');
-                        for(int i = 0 ; i < visited.Count(); i++){
+                        for(int i = 0 ; i < visited.Count; i++){
                             if(visited[i].Item1.getX() == x && visited[i].Item1.getY() == y){
                                 flagNode = visited[i];
                                 break;
@@ -330,19 +331,19 @@ namespace uburubur{
         }
         public void makePath(){
             foreach(var a in tempListPath){
-                for(int i = 0 ; i < a.Count(); i ++){
+                for(int i = 0 ; i < a.Count; i ++){
                     Console.WriteLine("x : " + a[i].Item1.getX() + " y : " + a[i].Item1.getY());
                 }
                 Console.WriteLine("\n");
             }
  
-            for(int i = 0 ; i < tempListPath.Count() - 1; i++){
+            for(int i = 0 ; i < tempListPath.Count - 1; i++){
                 // tempListPath[i].Reverse();
                 // tempListPath[i+1].Reverse();
                 // Node x = new Node(-9,-9,'0');
-                for(int j = 0 ; j < tempListPath[i].Count(); j++){
+                for(int j = 0 ; j < tempListPath[i].Count; j++){
                     bool cek = false;
-                    for(int k = 0 ; k < tempListPath[i+1].Count(); k++){
+                    for(int k = 0 ; k < tempListPath[i+1].Count; k++){
                         if(tempListPath[i][j].Item1.getX() == tempListPath[i+1][k].Item1.getX() 
                         && tempListPath[i][j].Item1.getY() == tempListPath[i+1][k].Item1.getY()){
                             // if()
@@ -361,12 +362,17 @@ namespace uburubur{
                 // tempListPath[i+1].Reverse();
             }
         }
+        
+        public List<Tuple<Node, char>> getPath()
+        {
+            return path;
+        }
         public void savePath(){
-            Console.WriteLine("templistpath : " + tempListPath.Count());
-            Console.WriteLine("nodesamepath count : " + nodeSamePath.Count());
+            Console.WriteLine("templistpath : " + tempListPath.Count);
+            Console.WriteLine("nodesamepath count : " + nodeSamePath.Count);
             tempListPath.Reverse();
             nodeSamePath.Reverse();
-            for(int i = 0 ; i < tempListPath.Count(); i++){
+            for(int i = 0 ; i < tempListPath.Count; i++){
                 // Console.WriteLine("nodesamepath i x :" + nodeSamePath[i].getX() + " y : " + nodeSamePath[i].getY());
                 // i awal
                 if(i == 0){
@@ -376,7 +382,7 @@ namespace uburubur{
                         path.Add(a);
                     }
                     tempListPath[i].Reverse();
-                    for(int j = 1; j < tempListPath[i].Count(); j++){
+                    for(int j = 1; j < tempListPath[i].Count; j++){
                         Console.WriteLine("templistPath x :" + tempListPath[i][j].Item1.getX());
                         Console.WriteLine("templistPath y :" + tempListPath[i][j].Item1.getY());
                         // Console.WriteLine("nodesamepath :" + nodeSamePath[i]);
@@ -403,7 +409,7 @@ namespace uburubur{
                             Console.WriteLine("sssdadasdas");
                         }
                         else{
-                            Console.WriteLine("pathcount : " + path.Count());
+                            Console.WriteLine("pathcount : " + path.Count);
                             if(tempListPath[i][j-1].Item2 == 'L'){
                                 Tuple<Node, char> a = new Tuple<Node, char>(new Node(tempListPath[i][j].Item1.getX(), tempListPath[i][j].Item1.getY(), tempListPath[i][j].Item1.getValue()), 'R');
                                 path.Add(a);
@@ -426,12 +432,12 @@ namespace uburubur{
                 }
  
                 // i akhir
-                else if(i == tempListPath.Count() - 1){
+                else if(i == tempListPath.Count - 1){
                     Console.WriteLine("i akhir");
                     tempListPath[i].Reverse();
                     bool cek1 = false;
-                    Console.WriteLine("temp i .count : " + tempListPath[i].Count());
-                    for(int j = 0 ; j < tempListPath[i].Count();j++){
+                    Console.WriteLine("temp i .count : " + tempListPath[i].Count);
+                    for(int j = 0 ; j < tempListPath[i].Count;j++){
                         Console.WriteLine("templistPath x :" + tempListPath[i][j].Item1.getX());
                         Console.WriteLine("templistPath y :" + tempListPath[i][j].Item1.getY());
                         if(tempListPath[i][j].Item1.getX() == nodeSamePath[i-1].getX()
@@ -451,7 +457,7 @@ namespace uburubur{
                     Console.WriteLine("i tengah2");
                     tempListPath[i].Reverse();
                     bool cek1 = false;
-                    for(int j = 0; j < tempListPath[i].Count(); j++){
+                    for(int j = 0; j < tempListPath[i].Count; j++){
                         if(tempListPath[i][j].Item1.getX() == nodeSamePath[i-1].getX()
                         && tempListPath[i][j].Item1.getY() == nodeSamePath[i-1].getY()){
                             cek1 = true;
@@ -463,7 +469,7 @@ namespace uburubur{
                     }
                     tempListPath[i].Reverse();
                     // bool cek2 = false;
-                    for(int j = 1 ; j < tempListPath[i].Count(); j++){
+                    for(int j = 1 ; j < tempListPath[i].Count; j++){
                         if(tempListPath[i][j].Item1.getX() == nodeSamePath[i].getX()
                         && tempListPath[i][j].Item1.getY() == nodeSamePath[i].getY()){
                              if(tempListPath[i][j-1].Item2 == 'L'){
