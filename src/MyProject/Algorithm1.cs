@@ -64,7 +64,6 @@ namespace uburubur
             while (queue.Count != 0)
             {
                 var tuple = queue.Dequeue();
-                visited.Add(tuple);
                 if (tuple.Item1.getValue() == 'T')
                 {
                     Console.WriteLine("TREASURE FOUND");

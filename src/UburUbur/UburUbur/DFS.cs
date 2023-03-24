@@ -167,6 +167,11 @@ namespace uburubur{
             return steps;
         }
 
+        public List<Node> getVisited()
+        {
+            return visited;
+        }
+
         
 
     }

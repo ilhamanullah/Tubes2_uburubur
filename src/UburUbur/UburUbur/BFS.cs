@@ -9,7 +9,6 @@ namespace uburubur
         private int treasureFound;
         private List<Tuple<Node, char>> visited = new List<Tuple<Node, char>>();
         private List<Tuple<Node, char>> treasureFoundTuple;
-        private List<List<Tuple<Node, char>>> listPath;
         private List<List<Tuple<Node, char>>> tempListPath = new List<List<Tuple<Node, char>>>();
         private List<Tuple<Node, char>> treasureAdded = new List<Tuple<Node, char>>();
         private List<Tuple<Node, char>> path = new List<Tuple<Node, char>>();
@@ -61,11 +60,12 @@ namespace uburubur
             inqueue(maze.getPosition());
             visited.Add(new Tuple<Node, char>(maze.getStart(), 'S'));
 
-            while (queue.Count != 0)
+            while (queue.Count != 0 && treasureFound < maze.getTreasure())
             {
                 var tuple = queue.Dequeue();
                 if (tuple.Item1.getValue() == 'T')
                 {
+                    treasureFound++;
                     Console.WriteLine("TREASURE FOUND");
                     bool found = false;
                     foreach (var a in treasureFoundTuple)
@@ -84,7 +84,10 @@ namespace uburubur
                 Node temp = maze.FindNode(tuple.Item1.getX(), tuple.Item1.getY());
                 maze.setPosition(temp);
                 inqueue(maze.getPosition());
+                if (notVisited(tuple.Item1))
+                {
                 visited.Add(tuple);
+                }
             }
         }
 
@@ -651,6 +654,17 @@ namespace uburubur
                     }
                 }
                 Console.WriteLine("\n");
+            }
+        }
+        public void deleteDuplicate()
+        {
+            int i = 0;
+            for (int j = 0; j < visited.Count; j++) 
+            {
+                if (i > 0)
+                {
+                    if (visited[j].Item1 == null) { }
+                }
             }
         }
     }

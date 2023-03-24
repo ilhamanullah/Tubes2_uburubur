@@ -22,6 +22,7 @@ namespace UburUbur
         private int speed;
         private List<char> steps;
         private long exetime;
+        private string fileName;
         public Form1()
         {
             InitializeComponent();
@@ -44,11 +45,13 @@ namespace UburUbur
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 // The user selected a file, you can do something with it here
-                string fileName = openFileDialog.FileName;
+                fileName = openFileDialog.FileName;
 
                 // Console.Write("Enter your file: ");
                 // string name;
                 // name = Console.ReadLine();
+                try
+                {
                 graph = new MazeGraph();
                 graph.readfile(fileName);
                 graph.findStart();
@@ -102,6 +105,12 @@ namespace UburUbur
                 }
 
                 // Set the data source of the DataGridView to the maze graph
+                }
+                catch (Exception err)
+                { 
+                    MessageBoxButtons button = MessageBoxButtons.OK;
+                    MessageBox.Show(err.Message, "Invalid File", button, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -128,6 +137,16 @@ namespace UburUbur
 
         private async void button2_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if(fileName == null)
+                {
+                    throw new Exception("Please Input File First");
+                }
+                if(checkBFS ==false && checkDFS == false)
+                {
+                    throw new Exception("Please Select Algorithm First");
+                }
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
                 for (int j = 0; j < dataGridView1.ColumnCount; j++)
@@ -155,6 +174,7 @@ namespace UburUbur
                 Stopwatch sw = Stopwatch.StartNew();
                 DFS route = new DFS();
                 route.DFSsearch(graph);
+                List<Node> visited = route.getVisited();
                 sw.Stop();
                 exetime = sw.ElapsedMilliseconds;
                 route.reversePath();
@@ -174,6 +194,7 @@ namespace UburUbur
 
                     }
                 }
+                label3.Text = "";
                 foreach (var Char in steps)
                 {
                     
@@ -181,37 +202,46 @@ namespace UburUbur
                     
                 }
                 label6.Text = Convert.ToString(exetime + " ms");
+                label8.Text = Convert.ToString(visited.Count);
 
 
-            }
+                }
             if (checkBFS)
             {
                 BFS route = new BFS();
+                Stopwatch sw = Stopwatch.StartNew();
                 route.search(graph);
+                sw.Stop();
+                exetime = sw.ElapsedMilliseconds;
                 List <Tuple<Node, char>> visited = new List<Tuple<Node, char>>();
+                dataGridView1.Rows[graph.getStart().getX()].Cells[graph.getStart().getY()].Style.BackColor = Color.LightBlue;
                 visited = route.getVisited();
                 int i = 0;
                 for (int j = 0; i < visited.Count; j++)
                 {
-                    if (dataGridView1.Rows[visited[j].Item1.getX()].Cells[visited[j].Item1.getY()].Style.BackColor == Color.Yellow)
-                    {
                     await Task.Delay(speed);
                     dataGridView1.Rows[visited[j].Item1.getX()].Cells[visited[j].Item1.getY()].Style.BackColor = Color.LightBlue;
+                    if (i == 0)
+                    {
+                        dataGridView1.Rows[graph.getStart().getX()].Cells[graph.getStart().getY()].Style.BackColor = Color.Yellow;
+                    }
                     if (i > 0)
                     {
                         dataGridView1.Rows[visited[j-1].Item1.getX()].Cells[visited[j-1].Item1.getY()].Style.BackColor = Color.Yellow;
                     }
                     i++;
-                    }
                     
                 }
+                label8.Text = Convert.ToString(visited.Count);
+                label6.Text = Convert.ToString(exetime) + " ms";
                 route.findPath(graph.getTreasure() - 1);
                 route.makePath();
                 route.savePath();
+                dataGridView1.Rows[graph.getStart().getX()].Cells[graph.getStart().getY()].Style.BackColor = Color.LightGreen;
                 List <Tuple<Node, char>> path = route.getPath();
                 foreach (var Tuple in path)
                 {
-                    await Task.Delay(500);
+                    await Task.Delay(speed);
                     if (dataGridView1.Rows[Tuple.Item1.getX()].Cells[Tuple.Item1.getY()].Style.BackColor == Color.LightGreen)
                     {
                         dataGridView1.Rows[Tuple.Item1.getX()].Cells[Tuple.Item1.getY()].Style.BackColor = Color.Green;
@@ -221,6 +251,19 @@ namespace UburUbur
                         dataGridView1.Rows[Tuple.Item1.getX()].Cells[Tuple.Item1.getY()].Style.BackColor = Color.LightGreen;
                     }
                 }
+                label3.Text = "";
+                foreach (var Tuple in path)
+                {
+
+                    label3.Text += Tuple.Item2 + " - ";
+
+                }
+            }
+            }
+            catch (Exception err)
+            {
+                MessageBoxButtons button = MessageBoxButtons.OK;
+                MessageBox.Show(err.Message, "Invalid File", button, MessageBoxIcon.Error);
             }
         }
 
@@ -257,6 +300,11 @@ namespace UburUbur
         private void label3_Click_1(object sender, EventArgs e)
         {
             
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

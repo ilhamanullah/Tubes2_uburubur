@@ -9,7 +9,6 @@ class MazeGraph{
     private char[,] maze;
     private List<Node> nodes;
     private int treasure;
-    private List<Node> treasures;
     private Node start;
     private Node position;
 
@@ -24,38 +23,40 @@ class MazeGraph{
     public void readfile(string fileName)
     {
         string[] rows = null;
-        bool valid = false;
-        while (!valid){
 
             
         string path = $"{fileName}";
         rows = File.ReadAllLines(path);
-
+        int tcount = 0;
+        int kcount = 0;
         for (int i = 0 ; i < rows.Length; i++){
                     for (int j = 0; j < rows[0].Length; j++){
                         if (rows[i][j] == 'K'){
-                            valid = true;
+                            kcount++;
                         }
                         else if(rows[i][j] == 'R'){
-                            valid = true;
                         }
                         else if(rows[i][j] == 'T'){
-                            valid = true;
+                        tcount++;
                         }
                         else if(rows[i][j] == ' '){
-                            valid = true;
                         }
                         else if(rows[i][j] == 'X'){
-                            valid = true;
                         }
                         else{
-                            valid = false;
-                            break;
-                            
+                            throw new Exception("Invalid Character Found: " + rows[i][j]);
                         }
                     }
                 }
-        }
+        if (kcount != 1)
+            {
+                throw new Exception("Multiple Starting Point Detected");
+            }
+        if (tcount < 1) 
+            {
+                throw new Exception("No Treasure Found in Maze");
+            }
+
 
 
         this.height = rows.Length;
