@@ -124,6 +124,7 @@ namespace UburUbur
             if (radioButton1.Checked)
             {
                 checkBFS = true;
+                checkDFS = false;
             }
         }
 
@@ -132,6 +133,7 @@ namespace UburUbur
             if (radioButton2.Checked) 
             {
                 checkDFS = true;   
+                checkBFS = false;
             }
         }
 
@@ -203,8 +205,6 @@ namespace UburUbur
                 }
                 label6.Text = Convert.ToString(exetime + " ms");
                 label8.Text = Convert.ToString(visited.Count);
-
-
                 }
             if (checkBFS)
             {
@@ -230,7 +230,6 @@ namespace UburUbur
                         dataGridView1.Rows[visited[j-1].Item1.getX()].Cells[visited[j-1].Item1.getY()].Style.BackColor = Color.Yellow;
                     }
                     i++;
-                    
                 }
                 label8.Text = Convert.ToString(visited.Count);
                 label6.Text = Convert.ToString(exetime) + " ms";
@@ -238,8 +237,8 @@ namespace UburUbur
                 route.makePath();
                 route.savePath();
                 dataGridView1.Rows[graph.getStart().getX()].Cells[graph.getStart().getY()].Style.BackColor = Color.LightGreen;
-                List <Tuple<Node, char>> path = route.getPath();
-                foreach (var Tuple in path)
+                List <Tuple<Node, char>> pathbfs = route.getPath();
+                foreach (var Tuple in pathbfs)
                 {
                     await Task.Delay(speed);
                     if (dataGridView1.Rows[Tuple.Item1.getX()].Cells[Tuple.Item1.getY()].Style.BackColor == Color.LightGreen)
@@ -252,7 +251,7 @@ namespace UburUbur
                     }
                 }
                 label3.Text = "";
-                foreach (var Tuple in path)
+                foreach (var Tuple in pathbfs)
                 {
 
                     label3.Text += Tuple.Item2 + " - ";

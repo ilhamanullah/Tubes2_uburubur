@@ -53,10 +53,6 @@ namespace uburubur
             int starti = maze.getStart().getX();
             int startj = maze.getStart().getY();
             maze.setPosition(maze.getStart());
-            Console.WriteLine("Starti: " + starti);
-            Console.WriteLine("Startj: " + startj);
-
-
             inqueue(maze.getPosition());
             visited.Add(new Tuple<Node, char>(maze.getStart(), 'S'));
 
@@ -66,7 +62,6 @@ namespace uburubur
                 if (tuple.Item1.getValue() == 'T')
                 {
                     treasureFound++;
-                    Console.WriteLine("TREASURE FOUND");
                     bool found = false;
                     foreach (var a in treasureFoundTuple)
                     {
@@ -232,24 +227,10 @@ namespace uburubur
             return true;
         }
 
-        public void printPath()
-        {
-            foreach (var tuple in path)
-            {
-                Console.WriteLine("Tuple: " + tuple.Item1.getValue() + " " + tuple.Item1.getX() + " " + tuple.Item1.getY() + " " + tuple.Item2);
-            }
-        }
         public void makePath()
         {
             tempListPath.Reverse();
-            foreach (var a in tempListPath)
-            {
-                for (int i = 0; i < a.Count; i++)
-                {
-                    Console.WriteLine("x : " + a[i].Item1.getX() + " y : " + a[i].Item1.getY());
-                }
-                Console.WriteLine("\n");
-            }
+            
 
             for (int i = 0; i < tempListPath.Count - 1; i++)
             {
@@ -287,22 +268,13 @@ namespace uburubur
         public void savePath()
         {
 
-            Console.WriteLine("templistpath : " + tempListPath.Count);
-            Console.WriteLine("nodesamepath count : " + nodeSamePath.Count);
-            foreach (var a in nodeSamePath)
-            {
-                Console.WriteLine("X : " + a.Item1.getX() + " Y : " + a.Item1.getY() + " idx :" + a.Item2);
-            }
             tempListPath.Reverse();
-            // nodeSamePath.Reverse();
-            Console.WriteLine("\n\n");
 
             for (int i = 0; i < tempListPath.Count; i++)
             {
                 // i akhir
                 if (i == tempListPath.Count - 1)
                 {
-                    Console.WriteLine("i akhir");
                     tempListPath[i].Reverse();
                     bool cek1 = false;
                     bool cek = false;
@@ -340,16 +312,10 @@ namespace uburubur
                         }
                     }
                     tempListPath[i].Reverse();
-                    Console.WriteLine("path akhir :");
-                    foreach (var a in path)
-                    {
-                        Console.WriteLine("x :" + a.Item1.getX() + " y :" + a.Item1.getY());
-                    }
                 }
                 // i awal
                 else if (i == 0)
                 {
-                    Console.WriteLine("i awal");
                     tempListPath[i].Reverse();
                     foreach (var a in tempListPath[i])
                     {
@@ -367,12 +333,10 @@ namespace uburubur
                             break;
                         }
                     }
-                    Console.WriteLine(idxnodesame);
 
 
                     if (cek)
                     {
-                        Console.WriteLine("cek");
                         for (int j = 1; j < tempListPath[i].Count; j++)
                         {
 
@@ -405,7 +369,6 @@ namespace uburubur
                             }
                             else
                             {
-                                Console.WriteLine("pathcount : " + path.Count);
                                 if (tempListPath[i][j - 1].Item2 == 'L')
                                 {
                                     Tuple<Node, char> a = new Tuple<Node, char>(new Node(tempListPath[i][j].Item1.getX(), tempListPath[i][j].Item1.getY(), tempListPath[i][j].Item1.getValue()), 'R');
@@ -426,13 +389,11 @@ namespace uburubur
                                     Tuple<Node, char> a = new Tuple<Node, char>(new Node(tempListPath[i][j].Item1.getX(), tempListPath[i][j].Item1.getY(), tempListPath[i][j].Item1.getValue()), 'U');
                                     path.Add(a);
                                 }
-                                Console.WriteLine("rrrrrr");
                             }
                         }
                     }
                     else
                     {
-                        Console.WriteLine("tidak cek");
                         for (int j = 1; j < tempListPath[i].Count; j++)
                         {
                             if (tempListPath[i][j - 1].Item2 == 'L')
@@ -477,18 +438,13 @@ namespace uburubur
                             path.Add(a);
                         }
                     }
-                    Console.WriteLine("path awal :");
-                    foreach (var a in path)
-                    {
-                        Console.WriteLine("x :" + a.Item1.getX() + " y :" + a.Item1.getY());
-                    }
+                    
                 }
 
 
                 // i tengah tengah
                 else
                 {
-                    Console.WriteLine("i tengah2");
                     tempListPath[i].Reverse();
                     bool cek1 = false;
                     bool ceka = false;
@@ -534,7 +490,6 @@ namespace uburubur
                         for (int j = 0; j < tempListPath[i].Count; j++)
                         {
                             path.Add(tempListPath[i][j]);
-                            Console.WriteLine("x : " + tempListPath[i][j].Item1.getX() + " y : " + tempListPath[i][j].Item1.getY() + " " + tempListPath[i][j].Item2);
                         }
                     }
 
@@ -602,58 +557,48 @@ namespace uburubur
                             {
                                 Tuple<Node, char> a = new Tuple<Node, char>(new Node(tempListPath[i][j].Item1.getX(), tempListPath[i][j].Item1.getY(), tempListPath[i][j].Item1.getValue()), 'R');
                                 path.Add(a);
-                                Console.WriteLine("x : " + a.Item1.getX() + " y : " + a.Item1.getY() + a.Item2);
 
                             }
                             else if (tempListPath[i][j - 1].Item2 == 'R')
                             {
                                 Tuple<Node, char> a = new Tuple<Node, char>(new Node(tempListPath[i][j].Item1.getX(), tempListPath[i][j].Item1.getY(), tempListPath[i][j].Item1.getValue()), 'L');
                                 path.Add(a);
-                                Console.WriteLine("x : " + a.Item1.getX() + " y : " + a.Item1.getY() + a.Item2);
                             }
                             else if (tempListPath[i][j - 1].Item2 == 'U')
                             {
                                 Tuple<Node, char> a = new Tuple<Node, char>(new Node(tempListPath[i][j].Item1.getX(), tempListPath[i][j].Item1.getY(), tempListPath[i][j].Item1.getValue()), 'D');
                                 path.Add(a);
-                                Console.WriteLine("x : " + a.Item1.getX() + " y : " + a.Item1.getY() + a.Item2);
                             }
                             else if (tempListPath[i][j - 1].Item2 == 'D')
                             {
                                 Tuple<Node, char> a = new Tuple<Node, char>(new Node(tempListPath[i][j].Item1.getX(), tempListPath[i][j].Item1.getY(), tempListPath[i][j].Item1.getValue()), 'U');
                                 path.Add(a);
-                                Console.WriteLine("x : " + a.Item1.getX() + " y : " + a.Item1.getY() + a.Item2);
                             }
                         }
                         tempListPath[i].Reverse();
-                        Console.WriteLine("add yg terakhir");
                         if (tempListPath[i][0].Item2 == 'L')
                         {
                             Tuple<Node, char> a = new Tuple<Node, char>(new Node(tempListPath[i][0].Item1.getX(), tempListPath[i][0].Item1.getY() + 1, 'S'), 'R');
                             path.Add(a);
 
-                            Console.WriteLine(a.Item1.getX() + "  a" + a.Item1.getY() + "  " + a.Item1.getValue());
                         }
                         else if (tempListPath[i][0].Item2 == 'R')
                         {
                             Tuple<Node, char> a = new Tuple<Node, char>(new Node(tempListPath[i][0].Item1.getX(), tempListPath[i][0].Item1.getY() - 1, 'S'), 'L');
                             path.Add(a);
-                            Console.WriteLine(a.Item1.getX() + "  b" + a.Item1.getY() + "  " + a.Item1.getValue());
                         }
                         else if (tempListPath[i][0].Item2 == 'U')
                         {
                             Tuple<Node, char> a = new Tuple<Node, char>(new Node(tempListPath[i][0].Item1.getX() + 1, tempListPath[i][0].Item1.getY(), 'S'), 'D');
                             path.Add(a);
-                            Console.WriteLine(a.Item1.getX() + "  c" + a.Item1.getY() + "  " + a.Item1.getValue());
                         }
                         else if (tempListPath[i][0].Item2 == 'D')
                         {
                             Tuple<Node, char> a = new Tuple<Node, char>(new Node(tempListPath[i][0].Item1.getX() - 1, tempListPath[i][0].Item1.getY(), 'S'), 'U');
                             path.Add(a);
-                            Console.WriteLine(a.Item1.getX() + "  d" + a.Item1.getY() + "  " + a.Item1.getValue());
                         }
                     }
                 }
-                Console.WriteLine("\n");
             }
         }
         public void deleteDuplicate()
