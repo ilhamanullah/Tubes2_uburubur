@@ -1,6 +1,6 @@
 using System;
 
-namespace coba
+namespace uburubur
 {
     class Node
     {

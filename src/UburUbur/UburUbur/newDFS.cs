@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 
-namespace coba{
+namespace uburubur{
     class DFS{
         private Stack<Node> stack;
         private Stack<Node> path;
@@ -34,13 +34,8 @@ namespace coba{
                     Console.WriteLine("All treasure found!");
                     break;
                 }
-                if (path.Peek().getValue() != 'T' && !exploreable(path.Peek())){
-                    Console.WriteLine("Dead Enddddd");
-                    while (!exploreable(path.Peek())){
-                        path.Pop();
-                    }
-                }
-                else if (path.Peek().getValue() == 'T' && !exploreable(path.Peek())){
+                
+                if (!exploreable(path.Peek())){
                     List<Node> temp = new List<Node>();
                     Console.WriteLine("Dead End");
                     bool found = false;
@@ -157,6 +152,10 @@ namespace coba{
             foreach (char c in steps){
                 Console.WriteLine(c);
             }
+        }
+        public List<Node> getPath()
+        {
+            return path.ToList();
         }
 
     }

@@ -152,5 +152,9 @@ namespace uburubur{
             }
         }
 
+        public List<Node> getPath(){
+            return path.ToList();
+        }
+
     }
 }

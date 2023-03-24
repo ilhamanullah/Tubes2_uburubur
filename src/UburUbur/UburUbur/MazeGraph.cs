@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;   
 using System.IO;
 
-namespace coba{
+namespace uburubur{
 class MazeGraph{
     private int width;
     private int height;
     private char[,] maze;
     private List<Node> nodes;
     private int treasure;
+    private List<Node> treasures;
     private Node start;
     private Node position;
 
@@ -26,7 +27,6 @@ class MazeGraph{
         bool valid = false;
         while (!valid){
 
-            Console.Write("Enter your file: ");
             
         string path = $"{fileName}";
         rows = File.ReadAllLines(path);
@@ -245,14 +245,26 @@ class MazeGraph{
         }
         return null;
     }
+
     public int getHeight()
         {
             return height;
         }
-    public int getWidth()
+        public int getWidth()
         {
             return width;
         }
-
+    public List<Node> getTreasures()
+        {
+            List<Node> temp = new List<Node>();
+            foreach (var node in nodes)
+            {
+                if (node.getValue() == 'T')
+                {
+                    temp.Add(node);
+                }
+            }
+            return temp;
+        }
 }
 }

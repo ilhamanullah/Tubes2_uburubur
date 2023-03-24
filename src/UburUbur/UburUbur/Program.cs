@@ -16,7 +16,7 @@ namespace UburUbur
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run();
+            Application.Run(new Form1());
         }
     }
 }
