@@ -5,7 +5,7 @@ Tugas Besar 2 IF2211 Strategi Algoritma Pengaplikasian Algoritma BFS dan DFS dal
 
 ## Authors
 
-- [Angger Ilham Amanullah](https://www.github.com/octokatherine) 13521001
+- [Angger Ilham Amanullah](https://www.github.com/ilhamanullah) 13521001
 - [Kelvin Rayhan Alkarim](https://github.com/kelvinra/) 13521005
 
 - [Maggie Zeta RS](https://github.com/maggiezetaa) 13521117
